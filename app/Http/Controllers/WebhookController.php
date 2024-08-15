@@ -58,10 +58,11 @@ class WebhookController extends Controller
                     $userName = $pullRequest['user']['login'];
                     $title = $pullRequest['title'];
 
-//                    // Fetch pull request files
+                    // Fetch pull request files
+
 //                    $filesResponse = Http::withToken(env('GITHUB_TOKEN'))
 //                        ->get("https://github.com/{$userName}/pulls/{$pullRequestNumber}/files");
-
+//
 //                    if ($filesResponse->successful()) {
 //                        $files = $filesResponse->json();
 //                        Log::info('Changed files in the pull request:', [$files]);
@@ -80,6 +81,7 @@ class WebhookController extends Controller
                         'pullRequestNumber' => $pullRequest['number'],
                         'repoFullName' => $pullRequest['base']['repo']['full_name'],
                         'base_repo' => $pullRequest['base']['repo'],
+                        'htmlUrl' => $pullRequest['html_url'],
                     ]);
                 }
             }
