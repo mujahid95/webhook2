@@ -64,6 +64,9 @@ class WebhookController extends Controller
                         ->get($pullRequest['html_url'] . '/files');
 
                     if ($filesResponse->successful()) {
+                        Log::info('files', [$pullRequest['html_url'] . '/files']);
+                        Log::info('res', [$filesResponse->json()]);
+                        Log::info('res2', [$filesResponse->body()]);
                         $files = $filesResponse->json();
                         Log::info('Changed files in the pull request:', [$files]);
                     } else {
@@ -72,17 +75,17 @@ class WebhookController extends Controller
 
 
                     // Log details
-                    Log::info('Pull Request Event:', [
-                        'action' => $action,
-                        'branch_name' => $branchName,
-                        'base_branch' => $baseBranch,
-                        'user_name' => $userName,
-                        'title' => $title,
-                        'pullRequestNumber' => $pullRequest['number'],
-                        'repoFullName' => $pullRequest['base']['repo']['full_name'],
-                        'base_repo' => $pullRequest['base']['repo'],
-                        'htmlUrl' => $pullRequest['html_url'],
-                    ]);
+//                    Log::info('Pull Request Event:', [
+//                        'action' => $action,
+//                        'branch_name' => $branchName,
+//                        'base_branch' => $baseBranch,
+//                        'user_name' => $userName,
+//                        'title' => $title,
+//                        'pullRequestNumber' => $pullRequest['number'],
+//                        'repoFullName' => $pullRequest['base']['repo']['full_name'],
+//                        'base_repo' => $pullRequest['base']['repo'],
+//                        'htmlUrl' => $pullRequest['html_url'],
+//                    ]);
                 }
             }
 
