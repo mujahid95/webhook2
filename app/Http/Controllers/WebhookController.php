@@ -51,15 +51,17 @@ class WebhookController extends Controller
                     $repoFullName = $pullRequest['base']['repo']['full_name'];
                     $action = $payload['action'];
 
+
                     // Extract details
                     $branchName = $pullRequest['head']['ref'];
                     $baseBranch = $pullRequest['base']['ref'];
                     $userName = $pullRequest['user']['login'];
                     $title = $pullRequest['title'];
 
-//                    // Fetch pull request files
-//                    $filesResponse = Http::withToken('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')
-//                        ->get("https://api.github.com/repos/{$repoFullName}/pulls/{$pullRequestNumber}/files");
+                    // Fetch pull request files
+
+//                    $filesResponse = Http::withToken(env('GITHUB_TOKEN'))
+//                        ->get("https://github.com/{$userName}/pulls/{$pullRequestNumber}/files");
 //
 //                    if ($filesResponse->successful()) {
 //                        $files = $filesResponse->json();
@@ -68,6 +70,7 @@ class WebhookController extends Controller
 //                        Log::error('Failed to fetch pull request files:', [$filesResponse->body()]);
 //                    }
 
+
                     // Log details
                     Log::info('Pull Request Event:', [
                         'action' => $action,
@@ -75,6 +78,10 @@ class WebhookController extends Controller
                         'base_branch' => $baseBranch,
                         'user_name' => $userName,
                         'title' => $title,
+                        'pullRequestNumber' => $pullRequest['number'],
+                        'repoFullName' => $pullRequest['base']['repo']['full_name'],
+                        'base_repo' => $pullRequest['base']['repo'],
+                        'htmlUrl' => $pullRequest['html_url']
                     ]);
                 }
             }
