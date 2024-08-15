@@ -51,6 +51,7 @@ class WebhookController extends Controller
                     $repoFullName = $pullRequest['base']['repo']['full_name'];
                     $action = $payload['action'];
 
+
                     // Extract details
                     $branchName = $pullRequest['head']['ref'];
                     $baseBranch = $pullRequest['base']['ref'];
@@ -58,15 +59,15 @@ class WebhookController extends Controller
                     $title = $pullRequest['title'];
 
 //                    // Fetch pull request files
-                    $filesResponse = Http::withToken(env('GITHUB_TOKEN'))
-                        ->get("https://api.github.com/repos/{$repoFullName}/pulls/{$pullRequestNumber}/files");
+//                    $filesResponse = Http::withToken(env('GITHUB_TOKEN'))
+//                        ->get("https://github.com/{$userName}/pulls/{$pullRequestNumber}/files");
 
-                    if ($filesResponse->successful()) {
-                        $files = $filesResponse->json();
-                        Log::info('Changed files in the pull request:', [$files]);
-                    } else {
-                        Log::error('Failed to fetch pull request files:', [$filesResponse->body()]);
-                    }
+//                    if ($filesResponse->successful()) {
+//                        $files = $filesResponse->json();
+//                        Log::info('Changed files in the pull request:', [$files]);
+//                    } else {
+//                        Log::error('Failed to fetch pull request files:', [$filesResponse->body()]);
+//                    }
 
                     // Log details
                     Log::info('Pull Request Event:', [
@@ -75,6 +76,9 @@ class WebhookController extends Controller
                         'base_branch' => $baseBranch,
                         'user_name' => $userName,
                         'title' => $title,
+                        'pullRequestNumber' => $pullRequest['number'],
+                        'repoFullName' => $pullRequest['base']['repo']['full_name'],
+                        'base_repo' => $pullRequest['base']['repo'],
                     ]);
                 }
             }
