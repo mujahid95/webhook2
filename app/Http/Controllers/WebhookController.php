@@ -32,11 +32,11 @@ class WebhookController extends Controller
 
             // This is pull request code
 
-//            // Verify if the signature matches
-//            if (!hash_equals($computedSignature, $signature)) {
-//                Log::warning('Invalid signature', ['signature' => $signature, 'computed' => $computedSignature]);
-//                return response()->json(['error' => 'Invalid signature'], 403);
-//            }
+            // Verify if the signature matches
+            if (!hash_equals($computedSignature, $signature)) {
+                Log::warning('Invalid signature', ['signature' => $signature, 'computed' => $computedSignature]);
+                return response()->json(['error' => 'Invalid signature'], 403);
+            }
 
             // Handle the webhook payload
             $payload = $request->all();
