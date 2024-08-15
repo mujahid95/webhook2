@@ -61,7 +61,7 @@ class WebhookController extends Controller
                     // Fetch pull request files
 
                     $filesResponse = Http::withToken(env('GITHUB_TOKEN'))
-                        ->get($pullRequest['html_url']);
+                        ->get($pullRequest['html_url'] . '/files');
 
                     if ($filesResponse->successful()) {
                         $files = $filesResponse->json();
