@@ -81,7 +81,7 @@ class WebhookController extends Controller
                         'pullRequestNumber' => $pullRequest['number'],
                         'repoFullName' => $pullRequest['base']['repo']['full_name'],
                         'base_repo' => $pullRequest['base']['repo'],
-                        'htmlUrl' => $pullRequest['html_url']
+                        'htmlUrl' => $pullRequest['html_url'],
                     ]);
                 }
             }
